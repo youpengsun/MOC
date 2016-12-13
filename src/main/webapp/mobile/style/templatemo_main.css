@@ -1,0 +1,236 @@
+
+* { font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+body { background-color: rgb(235,235,235); }
+h1 { font-size: 24px; }
+.btn a {
+    color: white;
+    text-decoration: none;
+}
+.logo { display: inline-block; }
+.logo h1 {
+    font-size: 24px;
+    margin: 10px 15px;
+}
+.mobile-content-wrapper {
+    float: left;
+    width: 100%;
+}
+.mobile-content {
+    margin-left: 235px;
+    margin-top: 0px;
+    min-height: 900px;
+    padding: 25px 20px 0 20px;
+    background-color: white;
+    overflow-x: hidden;
+}
+.mobile-footer {
+    clear: both;
+    font-size: 13px;
+    padding: 8px 0 5px 0;
+    text-align: center;
+    color: #ccc;
+    background-color: #333;
+}
+.margin-bottom-15 { margin-bottom: 15px; }
+.margin-bottom-20 { margin-bottom: 20px; }
+.margin-bottom-25 { margin-bottom: 25px; }
+.margin-bottom-30 { margin-bottom: 30px; }
+
+/* 3. Sidebar
+------------------------------------------------------*/
+#mobile_search_box {
+    width: 150px;
+    display: inline-block;
+}
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+.navbar-header { color: rgb(244,244,244); }
+.mobile-sidebar {
+    padding: 0;
+    margin-top: 20px;
+}
+.mobile-sidebar .mobile-sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.mobile-sidebar .mobile-sidebar-menu > li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0px;
+}
+.mobile-sidebar .mobile-sidebar-menu > li > a {
+    display: block;
+    position: relative;
+    margin: 0;
+    border: 0px;
+    padding: 20px 15px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;    
+}
+.mobile-sidebar-menu a { color: black; }
+.mobile-sidebar-menu a:hover { text-decoration: none; }
+.mobile-sidebar-menu li.sub .mobile-submenu { display: none; }
+.mobile-sidebar-menu li.sub.open .mobile-submenu { display: block; }
+.mobile-submenu { padding-left: 0; }
+.mobile-submenu li {
+    list-style: none;
+    background-color: #DFDFDF;
+}
+.mobile-submenu li a {
+    display: block;
+    padding: 20px 15px;
+    margin: 0;
+}
+.mobile-sidebar-menu > li.sub.open > a {
+    background-color: rgba(145,145,145,0.3);
+}
+.mobile-sidebar .mobile-sidebar-menu >li.active, .mobile-sidebar .mobile-sidebar-menu>li>a:hover {
+    background-color: rgb(191, 232, 167);
+}
+.mobile-submenu li > a:hover {
+    background-color: rgb(228,228,228);
+}
+.mobile-sidebar .mobile-sidebar-menu > li > a > i {
+    font-size: 16px;
+    top: 2px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 4px;
+    display: inline-block;
+    width: 1.25em;
+    text-align: center;
+}
+
+.vertical-center-0 {
+	position:relative;
+	margin: 0 auto;
+	margin-top: 35%;
+	text-align: left;
+	width: 90%;
+	height: 200px;
+	
+}
+
+/* 8. Bootstrap overrides
+----------------------------------------------*/
+.nav-pills>li, .nav-tabs>li>a, .modal-content, .breadcrumb {
+    border-radius: 0;
+}
+.list-group-item:first-child, .panel-heading {
+    
+}
+.list-group-item:last-child {
+   
+}
+.form-control-feedback { right: 15px; }
+
+.navbar-inverse {
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: #337ab7;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #337ab7;
+}
+
+.list-head {
+	padding-top: 5px;
+	color: rgb(51, 122, 183);
+	font-weight: 300;
+	font-size: 15px;
+}
+
+.list-content {
+	
+	color: #000000;
+	font-weight: 100;
+	font-size: 12px;
+	padding-left:1px;
+	
+}
+
+.dailycount-calendar {
+	 background-color: #fff;
+     border: 0px solid #ccc; 
+}
+
+@media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0) { @media
+{
+   #begdaField {
+    opacity: 0;
+    width:0;
+    height:0;
+    margin:0;
+    padding:0;
+    line-heigh:0;
+    
+    }
+   }
+}
+
+#begdaField, #enddaField{
+	background: transparent;
+    
+    opacity: 0;
+    width:0;
+    height:0;
+    margin:0;
+    padding:0;
+    line-heigh:0;
+    
+    }
+    
+.form-control {
+  padding: 0px 12px;
+  font-size: 12px;
+}
+
+
+/* 10. Media Queries
+------------------------------------------------------*/
+@media screen and (min-width: 992px) {
+    .mobile-sidebar {
+        width: 235px;
+        float: left;
+        position: relative;
+        margin-right: -100%;
+    }
+}
+@media screen and (max-width: 991px) {
+    .navbar-form {
+        padding: 0;
+        margin-left: 0;
+    }
+    .navbar-header { float: none; }
+    .navbar-toggle { display: block; }
+    .mobile-sidebar {
+        border-top: 0 !important;
+        margin: 20px;
+    }
+    .mobile-sidebar.navbar-collapse.collapse {
+        display: none !important;
+    }
+    .mobile-sidebar.navbar-collapse.in {
+        border-top: 0 !important;
+        margin: 20px;
+        position: relative;
+        overflow: hidden !important;
+        overflow-y: auto !important;
+        display: block !important;
+    }
+    .mobile-content-wrapper { float: none; }
+    .mobile-content { margin: 0; }
+}
+@media screen and (max-width: 767px) {
+    .mobile-chart-box {
+        padding-right: 0;
+    }
+}

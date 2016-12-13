@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,user-scalable=no">
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<title>消费明细</title>
+<link rel="shortcut icon" type="image/png" href="../../static/image/favicon.png">
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/moment.js/2.10.6/moment.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" href="../style/templatemo_main.css">
+<script src="../js/dailycount.js"></script>
+</head>
+<body>
+	<div id="main-wrapper">
+		<div id="header-navbar"></div>
+
+		<div class="mobile-page-wrapper">
+			<div class="navbar-collapse collapse mobile-sidebar">
+				<ul class="mobile-sidebar-menu">
+					<li><a href="#"><i class="fa fa-cubes"></i>图形分析</a></li>
+					<li class="active"><a href="#"><i class="fa fa-users"></i>表格分析</a></li>
+				</ul>
+			</div>
+			<!--/.navbar-collapse -->
+			<div class="mobile-content-wrapper">
+				<div class="mobile-content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class='col-xs-12 col-md-12'>
+								<div class="form-group">
+									<div class='input-group' id='datetimefrom'>
+										<span class="input-group-addon dailycount-calendar">起始时间：</span>
+										<input id="begdaField" type='date' class="form-control"
+											required="required" /> <input id="begdaBtn" type='date'
+											class="form-control" onclick="begdaClick();" />
+									</div>
+								</div>
+							</div>
+							<div class='col-xs-12 col-md-12'>
+								<div class="form-group">
+									<div class='input-group' id='datetimeto'>
+										<span class="input-group-addon dailycount-calendar">终止时间：</span>
+										<input id="enddaField" type='date' class="form-control"
+											required="required" /> <input id="enddaBtn" type='date'
+											class="form-control" onclick="enddaClick();" />
+									</div>
+								</div>
+							</div>
+							<div class='col-xs-12'>
+								<button id="dosearch" class="btn btn-warning">查询</button>
+							</div>
+						</div>
+					</div>
+					<div id="record_details" class="container-fluid">
+						<hr>
+						<div class="row margin-bottom-30">
+							<div class='col-xs-12'>
+								<ul class="nav nav-pills">
+									<li role="presentation" class="active"><a href="#">消费总计：
+											<span id="totalNo" class="badge">0</span>
+									</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="table-responsive">
+									<table class="table table-striped table-hover table-bordered">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>业务码</th>
+												<th>时间</th>
+												<th>工号</th>
+											</tr>
+										</thead>
+										<tbody id="tablebody">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="row margin-bottom-30">
+							<div class='col-xs-9'></div>
+						</div>
+						<nav id="messageArea"
+							class="navbar navbar-default navbar-fixed-bottom"
+							role="navigation">
+							<span class="navbar-text navbar-left" id="message"></span>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

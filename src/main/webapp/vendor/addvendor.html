@@ -1,0 +1,277 @@
+<div class="row" ng-controller="vendorAddCtrl">
+   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <h4>Add Vendor</h4>
+         </div>
+         <div class="panel-body">
+            <div class="col-md-12">
+               <button class="btn btn-primary" ng-click="addNewVendor()"><span class="glyphicon glyphicon-plus"></span>&nbsp;New</button>
+            </div>
+         </div>
+      </div>
+      <div class="panel panel-default fadein fadeout" ng-show="newVendorPanel.active" id="newVendorPanel">
+      <div class="col-md-12">
+               <span class="vendor-validate" ng-show="newForm.vendorTel.$touched&&(newForm.vendorTel.$error.maxlength||newForm.vendorTel.$error.minlength)">Mobile Length Error</span>
+               <span class="vendor-validate" ng-show="newForm.vendorEmail.$touched&&newForm.vendorEmail.$error.email">Email Syntax Error</span>
+               <span class="vendor-validate" ng-show="newForm.businessDistrict.$touched&&newForm.businessDistrict.$error.maxlength">District only 2 digit</span>
+               <span class="vendor-validate" ng-show="newForm.vendorDianping.$touched&&newForm.vendorDianping.$error.maxlength">Dianping ID support less than 10 digit</span>
+            </div>
+            <div class="panel-body" ng-form name="newForm">
+         <div class="col-md-12">
+         <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Vendor ID
+                        </span>
+                        <input type="text"  ng-disabled="true" class="form-control" ng-model="newVendorForm.id" >
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Vendor Name <span class="required-input">*</span>
+                        </span>
+                        <input type="text" required ng-disabled="newVendorForm.saved === true" class="form-control" ng-model="newVendorForm.name" >
+                     </div>
+                  </div>
+                  </div>
+            </div>
+         <div class="col-md-12">
+         <div class="row bottom-buffer">
+         <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Address <span class="required-input">*</span>
+                        </span>
+                        <input type="text" required ng-disabled="newVendorForm.saved === true" class="form-control" ng-model="newVendorForm.address" >
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Contact <span class="required-input">*</span>
+                        </span>
+                        <input type="text" required ng-disabled="newVendorForm.saved === true" class="form-control" ng-model="newVendorForm.contactName">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                        Email <span class="required-input">*</span>
+                        </span>
+                        <input name="vendorEmail" type="email" class="form-control" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.contactEmail" required>
+                     </div>
+                     </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Phone <span class="required-input">*</span>
+                        </span>
+                        <input name="vendorTel" type="text" ng-maxlength="30" ng-minlength="1" required ng-disabled="newVendorForm.saved === true" class="form-control" ng-model="newVendorForm.contactTelNO">
+                     </div>
+                  </div>
+                  <div class="col-md-3">
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+               <div class="col-md-6">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                        District <span class="required-input">*</span>
+                        </span>
+                        <select name="businessDistrict" requierd class="form-control" ng-model="newVendorForm.businessDistrict" 
+                        ng-disabled="newVendorForm.saved === true"
+                        ng-options="cc.id as ( cc.id + ' - ' + cc.description ) for cc in newVendorForm.businessDistrictID">
+                        </select>
+                        </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Vendor Type <span class="required-input">*</span>
+                        </span>
+                        <select ng-model="newVendorForm.vendorType"  class="form-control" ng-disabled="newVendorForm.saved === true" required>
+                        <option value="IN">Internal</option>
+                        <option value="EX">External</option>
+                        </select>
+                        </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+               <div class="col-md-6">
+                  <div class="input-group">
+                        <span class="input-group-addon">
+                        Pay Type <span class="required-input">*</span>
+                        </span>
+                        <select ng-model="newVendorForm.reportPeriod" class="form-control" ng-disabled="newVendorForm.saved === true" required>
+                        <option value="D0">Daily</option>
+                        <option value="W0">Weekly</option>
+                        <option value="M0">Monthly</option>
+                        </select>
+                     </div>
+                     </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Dianping
+                        </span>
+                        <input name="vendorDianping" type="text" class="form-control" ng-maxlength="10" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.dianpingID">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Wechat
+                        </span>
+                        <input type="text" class="form-control" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.wechatID">
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Promotion
+                        </span>
+                        <input type="text" class="form-control" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.promotion">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+            <hr>
+            <h5>Contract</h5>
+            <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <div class="input-group">
+                     <span class="input-group-addon"> Start Date<span class="required-input"> *</span></span> 
+                     <input name="newContractBegda" type="text" class="form-control"
+                     uib-datepicker-popup="{{newContractForm.dateFormat}}" ng-disabled="newVendorForm.saved === true"
+                     ng-model="newVendorForm.begda" is-open="newContractBegda.opened"
+                     min-date="minDate" datepicker-options="dateOptions"
+                     ng-required="true" close-text="Close" readonly="readonly"/> 
+                     <span class="input-group-btn">
+                     <button type="button" ng-disabled="newVendorForm.saved === true" class="btn btn-default" ng-click="newContractBegdaOpen($event)">
+                     <i class="glyphicon glyphicon-calendar"></i>
+                     </button></span>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                     <span class="input-group-addon"> End Date<span class="required-input"> *</span></span> 
+                     <input name="newContractEndda" type="text" class="form-control"
+                     uib-datepicker-popup="{{newContractForm.dateFormat}}" ng-disabled="newVendorForm.saved === true"
+                     ng-model="newVendorForm.endda" is-open="newContractEndda.opened"
+                     min-date="newVendorForm.begda" datepicker-options="dateOptions"
+                     ng-required="true" close-text="Close" readonly="readonly"/> 
+                     <span class="input-group-btn">
+                     <button type="button" ng-disabled="newVendorForm.saved === true" class="btn btn-default" ng-click="newContractEnddaOpen($event)">
+                     <i class="glyphicon glyphicon-calendar"></i>
+                     </button></span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Contract NO.
+                        </span>
+                        <input type="text" class="form-control" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.contractNo">
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="input-group">
+                        <span class="input-group-addon">
+                        Comment
+                        </span>
+                        <input type="text" class="form-control" ng-maxlength="45" ng-disabled="newVendorForm.saved === true" ng-model="newVendorForm.contractComment">
+                     </div>
+                  </div>
+               </div>
+            </div>
+            
+            <div class="col-md-12">
+               <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <button class="btn btn-primary" 
+                        ng-disabled="newForm.$invalid||
+                        newForm.vendorTel.$error.maxlength||newForm.vendorTel.$error.minlength||newVendorForm.dianpingID.$error.maxlength||
+                        newVendorForm.saved === true"
+                        ng-click="saveNewVendor(); newVendorForm.saved = true">
+                     <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp;Save
+                     </button>
+                     <button type="button" ng-disabled="newVendorForm.saved === true" class="btn btn-danger" ng-click="cancelNewVendor()">
+                     <span class="glyphicon glyphicon-remove"></span> &nbsp;Cancel
+                     </button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <div class="panel panel-default fadein fadeout" ng-show="newVendorLinePanel.active" id="newVendorLinePanel">
+         <div class="panel-heading">
+            <h4>Add New Vendor Line</h4>
+         </div>
+         <div class="panel-body">
+            <div class="table-responsive">
+            <table ng-table="addlineTableParams" ng-form="rowLineForm" class="table">
+                  <colgroup>
+                     <col width="5%" />
+                     <col width="10%" />
+                     <col width="20%" />
+                     <col width="20%" />
+                     <col width="10%" />
+                     <col width="10%" />
+                  </colgroup>
+                  <tr ng-repeat="newVendorLine in $data">
+                     <td data-title="'Line No'" class="text-center">
+                        <span class="editable-text" ng-model="newVendorLine.lineNO">{{newVendorLine.lineNO}}</span>
+                     </td>
+                     <td data-title="'Open ID'" class="text-center">
+                        <span class="editable-text" >{{newVendorLine.openID}}</span>
+                     </td>
+                     <td data-title="'Name'" class="text-center">
+                        <span class="editable-text" ng-model="vendorLineo.name" ng-if="!vendorLine.$edit">{{newVendorLine.name}}</span>
+                     </td>
+                     <td data-title="'WeChat ID'" class="text-center">
+                        <span class="editable-text" ng-model="vendorLineo.wechatIDo" ng-if="!vendorLine.$edit">{{newVendorLine.wechatID}}</span>
+                     </td>
+                     <td data-title="'QR Code'" class="text-center">
+                        <button uib-tooltip="upload logo to get QRcode"  class="btn btn-default btn-sm" ng-click="newLineQRCode(newVendorLine);"><span class="glyphicon glyphicon-cloud-download"></span></button>
+                        <input style=display:none; accept="image/*" id="newQRCodeBtn" type="file" name="file" onchange="angular.element(this).scope().generateNewQRcode(this.files)"/>
+                     </td>
+                  </tr>
+               </table>
+               <div class="col-md-12">
+               <div class="row bottom-buffer">
+                  <div class="col-md-6">
+                     <button class="btn btn-primary" ng-click="addNewVendorLineBtnClick();" >
+                     <span class="glyphicon glyphicon-plus"></span> &nbsp;New
+                     </button>
+                     <button class="btn btn-danger" ng-click="closeAllPanel();" >
+                     <span class="glyphicon glyphicon-remove"></span> &nbsp;Close All
+                     </button>
+                  </div>
+               </div>
+               </div>
+            </div>
+         </div>
+      </div>
+</div>
+</div>

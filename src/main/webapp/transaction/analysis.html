@@ -1,0 +1,90 @@
+<div ng-controller="analysisCtrl">
+	<div class="col-sm-12 col-md-12">
+		<div class="col-sm-3 col-md-3">
+			<div class="panel panel-info">
+				<div style="padding-left: 15px">
+					<h4>
+						<span class="glyphicon glyphicon-th-list"></span> Vendor List
+					</h4>
+				</div>
+				<div class="panel-body">
+					<button type="button" class="btn btn-primary">
+						<label class="checkbox-inline"> <input type="checkbox"
+							ng-model="analysis.checkBoxChecked" ng-click="checkAll()"
+							value="">{{analysis.checkBox}}
+						</label>
+					</button>
+					<button type="button" class="btn btn-success"
+						ng-click="checkAllActive()">Active</button>
+					<!-- <button class="btn btn-primary" ng-click="uncheckAll()">Uncheck all</button> -->
+					<!-- <button type="button" class="btn btn-success"
+						ng-click="checkDefault()">{{analysis.Canteen}}</button> -->
+					<hr />
+					<div class="pre-scrollable" id="vendor-list">
+					<label id="#vendor-list-panel" class="checklist" ng-repeat="vendor in vendors" ng-style="style(vendor.color)"> 
+						<input
+						type="checkbox" checklist-model="query.vendors"
+						checklist-value="vendor.id" checklist-change="selectChange()">
+						{{vendor.id}} - {{vendor.name}}
+					</label>
+					</div>
+				</div>
+			</div>
+			<!-- <div >
+               <datepicker ng-model="date" min-mode="month" datepicker-mode="'month'"></datepicker>
+            </div> -->
+		</div>
+		<div class="col-sm-9 col-md-9">
+			<div class="panel panel-info">
+				<div class="panel-body">
+					<div class="col-sm-12 col-md-12">
+						<div class="row">
+							<div class="col-sm-4 col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">Chart Type </span> <select
+										class="form-control" ng-model="chartConfig.options.chart.type"
+										ng-options="t.id as t.title for t in chartTypes"></select>
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">Start Date</span> 
+									<a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target="#"> 
+										<input type="text" class="form-control" data-date-time-input="YYYY-MMM" data-ng-model="query.beginMonth">
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<datetimepicker data-ng-model="query.beginMonth"
+											data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView: 'month',minView: 'month' }"
+											data-on-set-time="startDateOnSetTime()"
+											data-before-render="startDateBeforeRender($dates)">
+										</datetimepicker>
+									</ul>
+								</div>
+							</div>
+							<div class="col-sm-4 col-md-4">
+								<div class="input-group">
+									<span class="input-group-addon">End Date</span> <a
+										class="dropdown-toggle" id="dropdownEnd" role="button"
+										data-toggle="dropdown" data-target="#"> <input
+										type="text" class="form-control"
+										data-date-time-input="YYYY-MMM" data-ng-model="query.endMonth"></a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										<datetimepicker data-ng-model="query.endMonth"
+											data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed', startView: 'month', minView: 'month'}"
+											data-on-set-time="endDateOnSetTime()"
+											data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-md-12">
+						<div class="span9">
+							<highchart id="chart1" config="chartConfig" class="span9"></highchart>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

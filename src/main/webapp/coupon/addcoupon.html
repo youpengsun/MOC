@@ -1,0 +1,181 @@
+<div
+    class="row"
+    ng-controller="addCouponCtrl">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="title">
+                    <h4>Add New Coupon</h4>
+                </div>
+
+            </div>
+
+            <form name="addNewCouponForm">
+                <div class="panel-body">
+                    <div class="col-md-12">
+                        <h5>
+                            <span
+                                class="message-error"
+                                ng-model="errorInfo">{{errorInfo}}</span>
+                        </h5>
+                        <hr />
+                        <div class="row bottom-buffer">
+                            <div class="col-md-8">
+
+                                <label
+                                    class="btn btn-radio"
+                                    uib-tooltip="For employee self-use"
+                                    ng-model="newCoupon.type"
+                                    uib-btn-radio="'OW'">&nbsp;For Self-Use &nbsp;</label> <label
+                                    class="btn btn-radio"
+                                    uib-tooltip="Apply coupon for other ones"
+                                    ng-model="newCoupon.type"
+                                    uib-btn-radio="'OT'">For Others' Use</label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row bottom-buffer">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Employee ID<span class="required-input"> *</span>
+                                    </span> <input
+                                        type="text"
+                                        id="employeeid"
+                                        required
+                                        class="form-control"
+                                        ng-model="newCoupon.employeeID"
+                                        autofocus="autofocus"
+                                        placeholder="Separate multiple ID by ,">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row bottom-buffer">
+                            <div class="col-md-4">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Date <span class="required-input"> *</span></span> <input
+                                        name="regDate"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="yyyy.MM.dd"
+                                        ng-model="newCoupon.regDate"
+                                        is-open="regDate.opened"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Close" /> <span class="input-group-btn">
+                                        <button
+                                            type="button"
+                                            class="btn btn-default"
+                                            ng-click="regDateOpen($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <span
+                                    class="vendor-validate"
+                                    ng-show="addNewCouponForm.regDate.$invalid">Invalid date format</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-12">
+                        <div class="row bottom-buffer">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Count<span class="required-input"> *</span>
+                                    </span> <input
+                                        type="number"
+                                        name="count"
+                                        min="1"
+                                        max="99"
+                                        required
+                                        class="form-control text-right"
+                                        ng-model="newCoupon.count">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <span
+                                    class="vendor-validate"
+                                    ng-show="!checkCountSelfUse()">count must be 1 for self-use</span> <span
+                                    class="vendor-validate"
+                                    ng-show="!checkCountBoth()">count must be greater than 1 for 'Both' type</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row bottom-buffer">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon left"> Comments </span> <input
+                                        type="text"
+                                        max="100"
+                                        class="form-control"
+                                        ng-model="newCoupon.comment"
+                                        maxlength="100"
+                                        placeholder="Enter comments if any...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <hr />
+                        <div class="row bottom-buffer">
+                            <div class="col-md-8">
+                                <button
+                                    class="ngdialog-button btn btn-primary"
+                                    ng-click="saveCoupon(1)"
+                                    ng-disabled="addNewCouponForm.$invalid || !validateForm()"
+                                    accesskey="s">
+                                    <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp;Save
+                                </button>
+                                <button
+                                    type="button"
+                                    class="ngdialog-button btn btn-danger"
+                                    ng-click="initial()">
+                                    <span class="glyphicon glyphicon-refresh"></span> &nbsp;Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script
+    type="text/ng-template"
+    id="validate-info.html">
+        <div class="modal-header" ng-show="status=='VALIDATE_FAILED'">
+            <h4 class="modal-title msg-error"><span class="glyphicon glyphicon-remove-sign msg-error"></span>&nbsp;&nbsp;{{title}}</h4> 
+        </div>
+		<div class="modal-header" ng-show="status=='VALIDATE_WARNING'">
+            <h4 class="modal-title msg-warning"><span class="glyphicon glyphicon-question-sign msg-warning"></span>&nbsp{{title}}</h4> 
+        </div>
+        <div class="modal-body">
+			<ul>
+                <li ng-repeat="msg in messages">
+                    {{ msg.id }} &nbsp; - &nbsp; {{msg.info}} 
+                </li>
+            </ul>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()" ng-show="status=='VALIDATE_FAILED'" autofocus="autofocus">OK</button>
+			<button class="btn btn-primary" type="button" ng-click="confirm()" ng-show="status=='VALIDATE_WARNING'">Continue to Save</button>
+            <button class="btn btn-danger" type="button" ng-click="cancel()" ng-show="status=='VALIDATE_WARNING'">Cancel</button>
+        </div>
+</script>
+
+

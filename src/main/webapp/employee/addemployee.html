@@ -1,0 +1,114 @@
+<div class="addEmployee-panel">
+    <h4>Add new Employee &nbsp;<span id="addemployee-info" ng-model="addNewEmployForm.info">{{addNewEmployForm.info}}</span></h4>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="Id">ID<span class="required-input"> *</span></label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.id" class="form-control" id="employ_add_id" placeholder="Enter ID" required style="text-transform:uppercase"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="name">First Name<span class="required-input"> *</span></label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.firstName" class="form-control" id="employ_add_name" placeholder="Enter Name" required="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="lastname">Last Name<span class="required-input"> *</span></label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.lastName" class="form-control" id="employ_add_lastname" placeholder="Enter lastname" required="" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="costcenter">Cost Center<span class="required-input"> *</span></label>
+            <div class="col-md-10">
+                <select class="form-control" ng-model="addNewEmployForm.costCenter" id="employ_add_costcenter" ng-options="cc.key as ( cc.key + ' - ' + cc.value ) for cc in addNewEmployForm.costcenterName" required="" >
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="per/area">
+                Per/Area
+            </label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.perArea" class="form-control" id="employ_add_per/area" placeholder="Enter per/area"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="persubarea">
+                Per/Subarea
+            </label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.perSubArea" class="form-control" id="employ_add_persubarea" placeholder="Enter Per/Subarea"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="email">
+                Email
+            </label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewEmployForm.email" class="form-control" id="employ_add_email" placeholder="Enter email"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="mobile">
+                Mobile<span class="required-input"> *</span>
+            </label>
+            <div class="col-md-10">
+                <input type="number" ng-model="addNewEmployForm.mobile" class="form-control" id="employ_add_mobile" placeholder="Enter mobile" required="" />
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="language">
+                Language<span class="required-input"> *</span>
+            </label>
+            <div class="col-md-10">
+                <select ng-model="addNewEmployForm.language" class="form-control" id="employ_add_language" required="" >
+                <option value="ENGLISH">
+                        English
+                    </option>
+                    <option value="CHINESE">
+                        Chinese
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="status">
+                Status<span class="required-input"> *</span>
+            </label>
+            <div class="col-md-10">
+                <select class="form-control" ng-model="addNewEmployForm.status" id="employ_add_status" required="" >
+                    <option value="01">
+                        Active
+                    </option>
+                    <option value="00">
+                        Inactive
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="status">
+            </label>
+            <div class="col-md-10">
+                <label >
+                    <input type="checkbox" ng-model="addNewEmployForm.synced"> Synchronize Wechat Address Book
+                </label>
+            </div>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button btn btn-danger" ng-click="closeThisDialog(0)">
+                <span class="glyphicon glyphicon-remove"></span> &nbsp;Cancel
+            </button>
+            <button class="ngdialog-button btn btn-primary" ng-click="saveAndNewEmployee(1)">
+                <span class="glyphicon glyphicon-plus"></span> &nbsp;Save and New
+            </button>
+            <button class="ngdialog-button btn btn-primary" ng-click="addNewEmployee(2)">
+                <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp;Save
+            </button>
+        </div>
+    </form>
+</div>

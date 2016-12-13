@@ -1,0 +1,523 @@
+/*1.all part init*/
+@charset "utf-8";
+html {
+    color: #1e1e1e;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    height: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,
+th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+ul {
+    list-style: none
+}
+body {
+    vertical-align: baseline;
+    background: #ffffff;
+    font-family: Arial,Microsoft YaHei,sans-serif;
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+th {
+    text-align: inherit
+}
+fieldset,
+img {
+    border: 0;
+    margin: 0 auto
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: 500
+}
+
+a {
+    text-decoration: none;
+    color: #000
+}
+
+a:hover {
+    color: #000
+}
+
+.after,
+.before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 0;
+    width: 0;
+    border-style: solid;
+    border-color: transparent transparent transparent transparent;
+    border-width: 0;
+    display: inline-block
+}
+
+/*2.header */
+.header {
+    background: #fff;
+    position: relative;
+    height: 53px;
+    width: 100%;
+    z-index: 888
+}
+
+.header-inner .header-container {
+    width: 100%;
+    padding-bottom: 4px;
+    background: -webkit-linear-gradient(#00ace0, #0081bd, #215aa0); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#00ace0, #0081bd, #215aa0); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#00ace0, #0081bd, #215aa0); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#00ace0, #0081bd, #215aa0); /* 标准的语法 */
+    position: fixed;
+    top: 0;
+    border-bottom: rgba(0, 0, 255, 0.1) 1px solid
+}
+.header .logo {
+    height: 51px;
+    line-height: 51px;
+    font-size: 18px;
+    margin-left: 15px;
+    width: 100px;
+    float: left;
+    color: #fff;
+}
+
+.header.header-show .header-container {
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%);
+    -webkit-transition: all 350ms ease-in;
+    -moz-transition: all 350ms ease-in;
+    -o-transition: all 350ms ease-in;
+    transition: all 350ms ease-in
+}
+.header.header-hide .header-container {
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-transition: ease-out;
+    -moz-transition: all 500ms ease-out;
+    -o-transition: all 500ms ease-out;
+    transition: all 500ms ease-out
+}
+
+/*3.nav part*/
+nav ul {
+    overflow: hidden;
+    padding: 0;
+    margin: 0
+}
+nav .burger {
+    cursor: pointer;
+    padding: 16px;
+    z-index: 1000;
+    -moz-transform: translate3d(0, -9999em, 0);
+    -o-transform: translate3d(0, -9999em, 0);
+    -ms-transform: translate3d(0, -9999em, 0);
+    -webkit-transform: translate3d(0, -9999em, 0);
+    transform: translate3d(0, -9999em, 0);
+    position: fixed;
+    right: 0;
+    top: 0
+}
+nav .burger.opaque {
+    -moz-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0)
+}
+nav .burger div {
+    background: #ffffff;
+    height: 4px;
+    width: 27px;
+    margin-bottom: 4px;
+    -webkit-backface-visibility: hidden;
+    -moz-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0)
+}
+nav .burger div:first-of-type,
+nav .burger div:last-of-type {
+    -webkit-transition: -webkit-transform .3s ease .0s, background-color 0ms ease-out;
+    -moz-transition: -moz-transform .3s ease .0s, background-color 0ms ease-out;
+    -ms-transition: -ms-transform .3s ease .0s, background-color 0ms ease-out;
+    -o-transition: -o-transform .3s ease .0s, background-color 0ms ease-out;
+    transition: transform .3s ease .0s, background-color 0ms ease-out;
+    position: relative
+}
+nav .burger.transform div:first-of-type,
+nav .burger.transform div:last-of-type {
+    -webkit-transition: -webkit-transform .4s ease .3s, background-color 250ms ease-in;
+    -moz-transition: -moz-transform .4s ease .3s, background-color 250ms ease-in;
+    -ms-transition: -ms-transform .4s ease .3s, background-color 250ms ease-in;
+    -o-transition: -o-transform .4s ease .3s, background-color 250ms ease-in;
+    transition: transform .4s ease .3s, background-color 250ms ease-in;
+    background: #fff
+}
+nav .burger.transform div:first-of-type {
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    top: 6px
+}
+nav .burger.transform div:nth-child(2) {
+    display: none
+}
+nav .burger.transform div:last-of-type {
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    top: -2px
+}
+nav .sections {
+    z-index: 999;
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding: 0 5%;
+    overflow: hidden;
+    background: #7c7c7c;
+    -webkit-transition: all 240ms ease-out;
+    -moz-transition: all 240ms ease-out;
+    -ms-transition: all 240ms ease-out;
+    -o-transition: all 240ms ease-out;
+    transition: all 240ms ease-out;
+    -moz-transform: translateY(-1500px);
+    -o-transform: translateY(-1500px);
+    -ms-transform: translateY(-1500px);
+    -webkit-transform: translateY(-1500px);
+    transform: translateY(-1500px);
+    width: 100%
+}
+
+nav .sections.downward {
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    height: 100%;
+    padding-top: 15%
+}
+
+.scrolly {
+    overflow: hidden
+}
+nav .sections-list li {
+    width: 24%;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    background: #393939;
+    font-size: 14px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0.5% 1px
+}
+nav .sections-list-big li {
+    float: left;
+    width: 49%;
+    margin: 0 0.5% 15px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 14px
+}
+nav .sections-list-big li:first-of-type {
+    background: #393939
+}
+nav .sections-list-big li:nth-child(2) {
+    background: #f3473a
+}
+nav .sections-list li span {
+    display: inline-block
+}
+nav .sections-list li a,
+nav .sections-list-big li a {
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap
+}
+
+@-webkit-keyframes loading {
+    from {
+        -webkit-transform: rotate(0deg) translateZ(0)
+    }
+    to {
+        -webkit-transform: rotate(360deg) translateZ(0)
+    }
+}
+
+.assortment {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    line-height: 40px;
+    color: #95a0ac;
+    background: #1e1e1e
+}
+.assortment a {
+    color: #95a0ac;
+    padding: 0 15px
+}
+.assortment a:active {
+    color: #95a0ac
+}
+.pagination a {
+    padding-right: 10px;
+    font-size: 14px;
+    line-height: 30px;
+    color: #333
+}
+.pagination a:active {
+    color: #fff
+}
+.pagination a:visited {
+    color: #666
+}
+
+/*3.vendor list*/
+.content-container {
+    min-height: 400px;
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative
+}
+
+.vendor-list :active {
+    background-color: #e3e3e3;
+}
+
+.vendor-list :hover {
+    background-color: #e3e3e3;
+}
+
+.vendor-view {
+    overflow: hidden;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+    -o-transition: all 0.2s
+}
+
+.vendor-img a, .list-header span, .vendor-view .vendor-right {
+    position: relative;
+
+}
+.vendor-img a{
+    display: block;
+}
+
+.vendor-view.left {
+	display: table;
+    width: 100%
+}
+
+.vendor-view.left .vendor-left {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.vendor-view.left .vendor-right {
+    display: table-cell;
+    width: 100px;
+    padding: 8px 10px 8px 13px;
+}
+
+.vendor-view.left .vendor-right .vendor-img img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50px;
+    display: block;
+    vertical-align: middle;
+    background: #fff;
+   
+}
+
+.vendor-view.left .vendor-right .vendor-img .arrow-icon{
+	margin-bottom: 30px;
+	background: #ffffff;
+	height: 20px;
+    width: 20px;
+    border-radius: 50px;
+    display: block;
+    vertical-align: middle;
+   
+}
+
+.vendor-view.left .vendor-left .vendor-header a {
+    font-size: 16px
+}
+
+.vendor-view .vendor-img img {
+    width: 100%;
+    transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -o-transition: all .2s;
+    height: auto;
+    border-radius: 10px
+}
+
+.vendor-view .vendor-right .vendor-header, .vendor-view .vendor-right .vendor-tag {
+    padding: 0 0 5px
+}
+
+.vendor-tag, .vendor-view .vendor-header {
+    padding: 5px 0
+}
+
+.vendor-view .vendor-right .vendor-main {
+    height: 40px;
+    overflow: hidden
+}
+
+.vendor-view .vendor-header h3 span {
+    vertical-align: text-bottom;
+    margin-right: 3px;
+    color: #8c070e
+}
+
+.vendor-view .vendor-header h3 span img {
+    display: inline-block;
+    vertical-align: -5px
+}
+
+.vendor-view .vendor-header h1 {
+    margin-top: 10px
+}
+
+.vendor-view .vendor-header a {
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    font-weight: 400
+}
+
+.vendor-view .vendor-header a:hover {
+    color: #009bff
+}
+
+.vendor-view .vendor-main p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #777
+}
+
+.vendor-view .vendor-footer {
+    padding-top: 5px
+}
+
+.vendor-view .vendor-footer p {
+    position: relative;
+    color: #999;
+    line-height: 20px;
+    overflow: hidden;
+    font-size: 12px
+}
+
+.vendor-view .vendor-footer p span {
+    float: left;
+    margin-right: 5px
+}
+
+.vendor-promotion{
+	color:#009900;
+}
+
+
+.vendor-list .vendor-view {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-img {
+    padding: 10px 0 0
+}
+
+.header-img img {
+    width: 100%;
+    height: auto
+}
+
+.header-img p {
+    text-align: right;
+    color: #AAA;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 0 15px
+}
+
+.assortment, .length .header-img p.info, .length-list .vendor-view.position .vendor-main p {
+    font-size: 16px
+}
+
+.assortment, .assortment a, .assortment a:active {
+    color: #95a0ac
+}
+
+.assortment {
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    background: #1e1e1e
+}
+
+.assortment a {
+    padding: 0 15px
+}
+
+img.load {
+    width: 30px;
+    height: 30px;
+    display: block;
+    margin: 20px auto
+}
+
+img {
+	vertical-align: middle;
+	width:53px;
+	height:40px;
+}
+
+.img-circle {
+	
+}
+
+/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+	display: block; position: absolute;
+	background: hsl(180, 40%, 80%);
+	border-radius: 100%;
+	transform: scale(0);
+}
+/*animation effect*/
+.ink.animate {animation: ripple 0.65s linear;}
+@keyframes ripple {
+	100% {opacity:0; transform:scale(2.5);}
+}
+

@@ -1,0 +1,215 @@
+<div class="row" ng-controller="SyncController">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="title">
+					<h4>Selection Criteria</h4>
+				</div>
+				<div class="search-panel">
+					<div class="search-panel-first col-md-12">
+						<div class="row bottom-buffer">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Cost Center </span> <select
+										class="form-control" ng-model="synSearch.costcenter"
+										ng-options="cc.key as ( cc.key + ' - ' + cc.value ) for cc in synSearch.costcenterName">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Personal Area </span> <input
+										type="text" value="" class="form-control"
+										ng-model="synSearch.personalArea">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Subarea </span> <input
+										type="text" value="" class="form-control"
+										ng-model="synSearch.subArea">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> ID </span> <input type="text"
+										value="" class="form-control" ng-model="synSearch.id">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="search-panel-second col-md-12">
+						<div class="row bottom-buffer">
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> First Name </span> <input
+										type="text" value="" class="form-control"
+										ng-model="synSearch.firstName">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Last Name </span> <input
+										type="text" value="" class="form-control"
+										ng-model="synSearch.lastName">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Mobile </span> <input
+										type="text" value=" " class="form-control"
+										ng-model="synSearch.mobile">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<button class="btn btn-primary"
+									uib-tooltip="Search the employees by the criteria; and then compare them with Wechat address book"
+									tooltip-class="customTooltipClass" ng-click="search()">
+									<span class="glyphicon glyphicon-arrow-up"></span>&nbsp;&nbsp;Sync
+									Wechat
+								</button>
+								<button class="btn btn-primary"
+									uib-tooltip="Mutually compare all the employess and Wechat address book; no needs to input the criteria"
+									tooltip-class="customTooltipClass" ng-click="searchAll()">
+									<span class="glyphicon glyphicon-sort"></span>&nbsp;&nbsp;Mutual
+									Sync
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body"></div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<div class="col-md-3" style="padding-left: 0px;">
+						<button type="button" class="btn btn-default dropdown-toggle"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Action <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" id="syncselect-dropdown">
+							<li><a ng-click="selectAll();">Select All</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a ng-click="deselectAll();">Deselect All</a></li>
+						</ul>
+						<button class="btn btn-warning" ng-disabled="syncBtn === false"
+							tooltip-class="customTooltipClass" ng-click="update()">
+							<span class="glyphicon glyphicon-refresh"></span>&nbsp;&nbsp;Synchronize
+						</button>
+					</div>
+					<div class="col-md-2">
+						<h5>
+							<span class="inqiury-statistic" >Records
+								selected: {{recordsNumber}}</span>
+						</h5>
+					</div>
+					<div class="col-md-7" >
+						<h5 style="text-align: right;">
+							<label style ="margin-right: 30px;">Total:&nbsp;&nbsp;{{totalNumber}}</label>
+							<span ng-repeat="item in items" > 
+							<label><span
+									class={{item.icon}} uib-tooltip={{item.text}} ></span>
+									<span class="text-center">{{item.model}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							</label>
+
+							</span>
+						</h5>
+					</div>
+				</div>
+
+
+				<p>&nbsp;</p>
+				<div class="table-responsive">
+					<label style ="margin-right: 5px;">Sync Status Filter:</label> <span ng-repeat="item in items"
+						style="display: inline-block; margin-right: 25px;"> <label>
+							<input type="checkbox" ng-model="filterItems[item.name]" />&nbsp;<span
+							class={{item.icon}} />&nbsp;{{item.text}}
+					</label>
+					</span>
+					<hr />
+					<table ng-table="tableParams" class="table">
+						<colgroup>
+							<col width="1%" />
+							<col width="2%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="9%" />
+							<col width="2%" />
+							<col width="10%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="9%" />
+							<col width="10%" />
+						</colgroup>
+						<tr ng-repeat="wechat in $data | filter:filterSyncStatus  ">
+							<td><input type="checkbox" value={{wechat.name}}
+								ng-model="wechat.selected" ng-click="checkSyncEE(wechat);" /></td>
+							<td data-title="'ID'" sortable="'employee.id'"
+								class="text-center"><span>{{wechat.employee.id}}</span></td>
+							<td data-title="'Last Name'" sortable="'employee.lastName'"
+								class="text-center"><span>{{wechat.employee.lastName}}</span>
+							</td>
+							<td data-title="'First Name'" sortable="'employee.firstName'"
+								class="text-center"><span>{{wechat.employee.firstName}}</span>
+							</td>
+							<td data-title="'Cost Center'"
+								sortable="'employee.department.id'" class="text-center"><span>{{wechat.employee.department.id}}</span>
+							</td>
+							<td data-title="'Cell phone'" sortable="'employee.telNo'"
+								class="text-center"><span>{{wechat.employee.telNo}}</span>
+							</td>
+							<td data-title="'Email'" sortable="'employee.email'"
+								class="text-center"><span>{{wechat.employee.email}}</span>
+							</td>
+							<td data-title="'Status'" sortable="'employee.status'"
+								class="text-center"><span>{{wechat.employee.status}}</span>
+							</td>
+							<td data-title="'We.Name'" sortable="'user.name'"
+								class="text-center"><span>{{wechat.user.name}}</span></td>
+							<td data-title="'We.Dep'" sortable="'user.wechat'"
+								class="text-center"><span>{{wechat.user.department.toString()}}</span>
+							</td>
+							<td data-title="'We.Mobile'" sortable="'user.mobile'"
+								class="text-center"><span>{{wechat.user.mobile}}</span></td>
+							<td data-title="'We.Mail'" sortable="'user.email'"
+								class="text-center"><span>{{wechat.user.email}}</span></td>
+							<td data-title="'Check Status'" sortable="'syncStatus'"
+								class="text-center">
+								<!-- <span >{{wechat.checkStatus}}</span> --> <span
+								ng-model="wechat.syncStatus" uib-tooltip="synced"
+								ng-if="wechat.syncStatus === 'SYNCED'"
+								class="glyphicon glyphicon-check"></span> <span
+								ng-model="wechat.syncStatus" uib-tooltip="to delete"
+								ng-if="wechat.syncStatus === 'TODELETE'"
+								class="glyphicon glyphicon-trash"></span> <span
+								ng-model="wechat.syncStatus" uib-tooltip="to add"
+								ng-if="wechat.syncStatus === 'TOADD'"
+								class="glyphicon glyphicon-plus-sign"></span> <span
+								ng-model="wechat.syncStatus" uib-tooltip="to update"
+								ng-if="wechat.syncStatus === 'TOUPDATE'"
+								class="glyphicon glyphicon-question-sign"></span> <span
+								ng-model="wechat.syncStatus" uib-tooltip="to activate"
+								ng-if="wechat.syncStatus === 'TOACTIVATE'"
+								class="glyphicon glyphicon-ok-circle"></span> <span
+								ng-model="wechat.syncStatus" uib-tooltip="to deactivate"
+								ng-if="wechat.syncStatus === 'TODEACTIVATE'"
+								class="glyphicon glyphicon-ban-circle"></span> <label id="abc"
+								data-placement="bottom-left" data-type="info"
+								data-animation="am-fade-and-scale" data-trigger="hover"></label>
+							</td>
+							<td data-title="'Comment'" sortable="''" class="text-center">
+								<span>{{wechat.comments}}</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

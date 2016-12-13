@@ -1,0 +1,165 @@
+<div class="container" id="reporttable" style="page-break-after:avoid;page-break-before:avoid;">
+	<div class="row center-block" style="width: 90%;">
+		<div class="row">
+			<div class="col-xs-4 col-md-4">
+				<img style="width: 65px; height: 65px"
+					src="static/image/logo_sap_small.png">
+			</div>
+			<div class="col-xs-4 col-md-4 text-center">
+				<h1>结算单</h1>
+				<h4>
+					<small>{{report.beginDate}}~{{report.endDate}}</small>
+				</h4>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="panel-heading">
+					<h4>思爱普（中国）有限公司</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						地址：&nbsp;&nbsp;上海浦东.晨晖路1001号<br> 联系人：&nbsp;Fanny <br>
+						电话：&nbsp;&nbsp;021-XXXXXXX
+					</p>
+				</div>
+			</div>
+			<div class="col-xs-5 col-xs-offset-2 ">
+				<div class="panel-heading">
+					<h4>供应商 : {{report.vendorName}}</h4>
+				</div>
+				<div class="panel-body">
+					<p>
+						地址：&nbsp;&nbsp;{{report.vendorAddress}}<br>
+						联系人：&nbsp;{{report.contractName}} <br>
+						电话：&nbsp;&nbsp;{{report.telephone}}<br>
+					</p>
+				</div>
+			</div>
+		</div>
+		<!-- / end client details section -->
+		<hr style="margin-top: 0px; margin-bottom: 10px;" />
+		<div class="row center-block" style="height: 350px;">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>
+							<h4>#</h4>
+						</th>
+						<th>
+							<h4>餐饮线</h4>
+						</th>
+						<th>
+							<h4>消费次数</h4>
+						</th>
+						<th>
+							<h4>消费总金额</h4>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="line in report.lineRecords">
+						<td>{{ line.lineNO }}</td>
+						<td>{{ line.lineName }}</td>
+						<td class="text-right">{{ line.consumeCount }}</td>
+						<td class="text-right">{{ line.consumeTotal }}</td>
+					</tr>
+					<!--  <tr>
+                                <td>Article</td>
+                                <td><a href="#">Title of your article here</a></td>
+                                <td class="text-right">-</td>
+                                <td class="text-right">$200.00</td>
+                            </tr>
+                            <tr>
+                                <td>Template Design</td>
+                                <td><a href="#">Details of project here</a></td>
+                                <td class="text-right">10</td>
+                                <td class="text-right">75.00</td>
+                            </tr>
+                            <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr> <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr> <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr> <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr> 
+                            <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr> 
+                            <tr>
+                                <td>Development</td>
+                                <td><a href="#">WordPress Blogging theme</a></td>
+                                <td class="text-right">5</td>
+                                <td class="text-right">50.00</td>
+                            </tr>   -->
+				</tbody>
+			</table>
+		</div>
+		<div class="row text-right">
+			<div class="col-xs-2 col-xs-offset-9">
+				<p>
+					<strong> 消费单价 : <br> 消费总次数 : <br> 消费总金额 : <br>
+					</strong>
+				</p>
+			</div>
+			<div class="col-xs-1 text-right">
+				<strong> {{report.standardPrize}}<br>
+					{{report.totalCount}} <br> {{report.totalAmount}} <br>
+				</strong>
+			</div>
+		</div>
+
+		<hr />
+		<div class="row">
+			<div class="col-xs-5">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h4>甲方</h4>
+					</div>
+					<div class="panel-body">
+						<p>
+							签字 : <label>_______________________</label>
+						</p>
+						<p>
+							时间 : <label>_______________________</label>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5 col-xs-5 col-xs-offset-2">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h4>乙方</h4>
+					</div>
+					<div class="panel-body">
+						<p>
+							签字 : <label>_______________________</label>
+						</p>
+						<p>
+							时间 : <label>_______________________</label>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /row -->
+</div>
+<!-- /container -->

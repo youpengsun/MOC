@@ -1,0 +1,225 @@
+<div class="row" ng-controller="consumeInquiryCtrl">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="title">
+					<h4>Consume Records Inquiry Criteria</h4>
+				</div>
+			</div>
+
+			<form name="inquiryForm" ng-submit="search()">
+				<div class="panel-body" ng-form name="consumeInquiryForm">
+					<div class="search-panel-first col-md-12">
+						<!-- validte message -->
+						<span class="vendor-validate"
+							ng-show="consumeInquiryForm.begda.$invalid || consumeInquiryForm.endda.$invalid">Invalid
+							date format</span>
+
+
+						<div class="row bottom-buffer">
+							<!-- Date picker -->
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Start Date </span> <input
+										name="begda" type="text" class="form-control"
+										uib-datepicker-popup="{{criteria.dateFormat}}"
+										ng-model="criteria.begda" is-open="begda.opened"
+										min-date="minDate" datepicker-options="dateOptions"
+										ng-required="true" close-text="Close" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="begdaOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> End Date </span> <input
+										name="endda" type="text" class="form-control datepicker"
+										uib-datepicker-popup="{{criteria.dateFormat}}"
+										ng-model="criteria.endda" is-open="endda.opened"
+										min-date="criteria.begda" datepicker-options="dateOptions"
+										ng-required="true" close-text="Close" /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="enddaOpen($event)">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Category</span> <select
+										class="form-control" ng-model="criteria.categoryKey"
+										ng-options="c.key as c.value for c in criteria.category">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Status</span> <select
+										class="form-control" ng-model="criteria.statusKey"
+										ng-options="s.key as s.value for s in criteria.status">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<!-- End Date picker -->
+
+						</div>
+
+					</div>
+
+					<div class="search-panel-second col-md-12">
+						<div class="row bottom-buffer">
+
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Cost Center </span> 
+									<select
+										class="form-control" ng-model="criteria.costerCenterID"
+										ng-options="cc.key as ( cc.key + ' - ' + cc.value ) for cc in criteria.costCenter">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Employee ID </span> <input
+										type="text" value="" class="form-control"
+										ng-model="criteria.employeeID">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> First Name </span> <input
+										type="text" value="" class="form-control"
+										ng-model="criteria.firstName">
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Last Name </span> <input
+										type="text" value="" class="form-control"
+										ng-model="criteria.lastName">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="search-panel-third col-md-12">
+						<div class="row bottom-buffer">
+
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Vendor</span> 
+									<select
+										class="form-control" ng-model="criteria.vendorID"
+										ng-options="v.id as (v.id + ' - ' + v.name ) group by v.activeStatus for v in criteria.vendor">
+										<!-- ng-options="v.key as ( v.key + ' - ' + v.value ) for v in criteria.vendor"> -->
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon"> Tranaction Code </span> <input
+										type="text" value=" " class="form-control"
+										ng-model="criteria.transactionCode">
+								</div>
+							</div>
+
+
+
+							<div class="col-md-6">
+								<div class="input-group" style="float: right">
+									<button type="submit" class="btn btn-primary"
+										ng-disabled="consumeInquiryForm.$invalid">
+										<span class="glyphicon glyphicon-search"></span>&nbsp;Search
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<div class="panel panel-default">
+			<!-- <div class="panel-heading">
+				<div class="title">
+					<h4>Inquiry Result:</h4>
+				</div>
+			</div> -->
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h5>
+						<span class="inqiury-statistic" ng-model="loginMessage">Records
+							selected: {{recordsNumber}}</span>
+					</h5>
+					<input class="form-control" id="search-field"
+						placeholder="Filter..." type="text" ng-model="filter.$" />
+				</div>
+
+				<div class="table-responsive">
+					<p></p>
+					<table ng-table="tableParams" class="table">
+						<!-- 						<colgroup>
+							<col width="8%" />
+							<col width="8%" />
+							<col width="8%" />
+							<col width="6%" />
+							<col width="6%" />
+							<col width="10%" />
+							<col width="6%" />
+							<col width="8%" />
+							<col width="12%" />
+							<col width="6%" />
+							<col width="8%" />
+							<col width="6%" />
+						</colgroup> -->
+						<tr ng-repeat="cr in $data">
+
+							<td data-title="'Consume Time'" sortable="'consumeTime'"
+								class="text-center"><span>{{cr.consumeTime}}</span></td>
+
+							<td data-title="'Category'" sortable="'category'"
+								class="text-center"><span>{{cr.category}}</span></td>
+
+							<td data-title="'Tran. Code'" sortable="'transactionCode'"
+								class="text-center"><span>{{cr.transactionCode}}</span></td>
+
+							<td data-title="'EE ID'" sortable="'employeeID'"
+								class="text-center"><span>{{cr.employeeID}}</span></td>
+
+							<td data-title="'Employee Name'" sortable="'employeeName'"
+								class="text-center"><span>{{cr.employeeName}}</span></td>
+
+							<td data-title="'Cost Center'" sortable="'costCenterID'"
+								class="text-center"><span>{{cr.costCenterID + " - "
+									+ cr.costCenterName}}</span></td>
+
+
+							<td data-title="'Vendor'" sortable="'vendorID'"
+								class="text-center"><span>{{cr.vendorID + " - " +
+									cr.vendorName}}</span></td>
+
+							<td data-title="'Vendor Line'" sortable="'vendorLineNumber'"
+								class="text-center"><span>{{cr.vendorLineNumber + "
+									- " + cr.vendorLineName}}</span></td>
+
+							<td data-title="'Status'" sortable="'status'" class="text-center"><span>{{cr.status}}</span></td>
+
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

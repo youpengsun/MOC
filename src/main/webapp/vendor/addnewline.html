@@ -1,0 +1,42 @@
+<div class="addVendorLineNew-panel" ng-form name="lineName">
+    <h4>Add New Vendor Line</h4>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Vendor ID</label>
+            <div class="col-md-10">
+                <input type="text" disabled value="{{addNewVendorLineForm.vendorID}}" class="form-control" required/>
+            </div>
+        </div>
+        <!--  <div class="form-group">
+            <label class="col-md-2 control-label">Line No.</label>
+            <div class="col-md-10">
+                <input type="text" disabled value="{{addNewVendorLineForm.lineNO}}" class="form-control" required/>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label class="col-md-2 control-label">Name<span class="required-input"> *</span></label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewVendorLineForm.name" class="form-control" required/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Wechat ID
+            </label>
+            <div class="col-md-10">
+                <input type="text" ng-model="addNewVendorLineForm.wechatID" class="form-control"/>
+            </div>
+        </div>
+        
+        <div class="ngdialog-buttons">
+            <button class="button btn btn-primary" ng-disabled="lineName.$invalid" ng-click="addNewVendorLine()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> &nbsp;Save
+            </button>
+            <button type="button" class="button btn btn-danger" ng-click="closeThisDialog(0)">
+                <span class="glyphicon glyphicon-remove"></span> &nbsp;Cancel
+            </button>
+          
+        </div>
+    </form>
+</div>

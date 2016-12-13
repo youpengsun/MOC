@@ -1,0 +1,52 @@
+<div class="row" ng-controller="settlementCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Vendor Settlement</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <form name="inputForm">
+                        <div class="col-sm-5 col-md-4 ">
+                            <div class="input-group" ng-class="{ 'has-error': queryForm.vendorId.$invalid }">
+                                <span class="input-group-addon">
+                                    Vendor
+                                </span>
+                                <select class="form-control" name="vendor" ng-change="changeVendor()" ng-model="queryForm.vendorId" ng-required="true" ng-options="v.id as (v.name +getPeriod(v.reportPeriod) ) group by v.activeStatus for v in vendors">
+                                    <option value=""></option>
+                                </select>
+                                
+                            </div>
+                        </div>
+                        <!-- <div class="col-sm-5 col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    Time
+                                </span>
+                                <input type="input" datepicker-options="{minMode: 'month'}" datepicker-mode="'month'" class="form-control" uib-datepicker-popup="{{format}}" ng-model="queryForm.time" is-open="status.opened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" show-button-bar="false" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div> -->
+                        <div class="col-sm-5 col-md-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    Time Range
+                                </span>
+                                <input  class="form-control" type="daterange" ng-model="queryForm.daterange" ranges="ranges">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <button class="btn btn-primary" ng-click="querySettlement()"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            <button class="btn btn-info" ng-print print-element-id="reporttable" ng-disabled="!report.active"><span class="glyphicon glyphicon-print"></span> Print</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel fadein fadeout" ng-show="report.active" >
+            <div ng-include="'transaction/report.html'"></div>
+        </div>
+    </div>
+</div>

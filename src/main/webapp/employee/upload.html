@@ -1,0 +1,99 @@
+<div class="row" ng-controller="batchController">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+   <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Batch Upload</h4>
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                        <h5>
+                  Upload Excel File
+                  <h5>
+             </div>
+               <div class="col-md-8">
+                  <div class="col-md-6">
+                     <input id="upLoadFilePath" class="form-control" type="text" disabled/>
+                     <input style="display:none;" name="eeexcel" id="eeexcel" type="file" 
+                     class="file" accept="application/vnd.ms-excel" name="file" 
+                     onchange="angular.element(this).scope().uploadFile(this.files)"/>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="btn-toolbar">
+                        <div class="btn-group" role="group"><button ng-click="switchToUpload()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span>&nbsp;&nbsp;Browser</button></div>
+                        <div class="btn-group" role="group"><button ng-disabled="upload.finish === false" ng-click="saveUploadData()" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;&nbsp;Upload</button></div>
+                     </div>
+                  </div>
+                  
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12"></div>
+            <p>&nbsp;</p>
+            <div class="table-responsive">
+                
+                <table ng-table="tableParams" class="table">
+                    <colgroup>
+                        <col width="6%" />
+                        <col width="4%" />
+                        <col width="8%" />
+                        <col width="8%" />
+                        <col width="7%" />
+                        <col width="9%" />
+                        <col width="5%" />
+                        <col width="10%" />
+                        <col width="6%" />
+                        <col width="9%" />
+                        <col width="14%" />
+                        <col width="2%" />
+                        <col width="2%" />
+                        <col width="8%" />
+                    </colgroup>
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Excel Row'" sortable="row" class="text-center">
+                            <span class=" " ng-if="!user.$edit">{{user.excelRow}}</span>
+                        </td>
+                        <td data-title="'ID'" sortable="employee.id" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.id}}</span>
+                        </td>
+                        <td data-title="'Last Name'" sortable="'employee.lastName'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.lastName}}</span>
+                        </td>
+                        <td data-title="'First Name'" sortable="'employee.firstName'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.firstName}}</span>
+                        </td>
+                        <td data-title="'Cell phone'" sortable="'employee.telNo'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.telNo}}</span>
+                        </td>
+                        <td data-title="'Email'" sortable="'employee.email'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.email}}</span>
+                        </td>
+                        <td data-title="'Wechat'" sortable="'wechat'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.wechat}}</span>
+                        </td>
+                        <td data-title="'Per/Area'" sortable="'employee.personalArea'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.personalArea}}</span>
+                        </td>
+                        <td data-title="'Per/Subarea'" sortable="'employee.personalSubarea'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.personalSubarea}}</span>
+                        </td>
+                        <td data-title="'Cost Center'" sortable="'employee.department.id'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.department.id}}</span>
+                        </td>
+                        <td data-title="'Cost Center Desc'" sortable="'employee.department.name'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.department.name}}</span>
+                        </td>
+                        <td data-title="'Language'" sortable="'employee.language'" class="text-center">
+                            <span class="editable-text" ng-if="!user.$edit">{{user.employee.language}}</span>
+                        </td>
+                        <td data-title="'Status'" sortable="'status'" class="text-center">
+                            <span>{{user.status}}</span>
+                        </td>
+                        <td data-title="'Message'" sortable="'message'" class="text-center">
+                            <span>{{user.message}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+     </div>
+</div>

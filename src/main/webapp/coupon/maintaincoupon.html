@@ -1,0 +1,262 @@
+<div
+    class="row"
+    ng-controller="maintainCouponCtrl">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="title">
+                    <h4>Coupon Registration Inquiry</h4>
+                </div>
+            </div>
+
+            <form
+                name="inquiryForm"
+                ng-submit="search()">
+                <div
+                    class="panel-body"
+                    ng-form
+                    name="couponInquiryForm">
+                    <div class="search-panel-first col-md-12">
+                        <!-- validte message -->
+                        <span
+                            class="vendor-validate"
+                            ng-show="couponInquiryForm.begda.$invalid || couponInquiryForm.endda.$invalid">Invalid date format</span>
+
+                        <div class="row bottom-buffer">
+                            <!-- Date picker -->
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Start Date </span> <input
+                                        name="begda"
+                                        type="text"
+                                        class="form-control"
+                                        uib-datepicker-popup="{{criteria.dateFormat}}"
+                                        ng-model="criteria.begda"
+                                        is-open="begda.opened"
+                                        min-date="minDate"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Close" /> <span class="input-group-btn">
+                                        <button
+                                            type="button"
+                                            class="btn btn-default"
+                                            ng-click="begdaOpen($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> End Date </span> <input
+                                        name="endda"
+                                        type="text"
+                                        class="form-control datepicker"
+                                        uib-datepicker-popup="{{criteria.dateFormat}}"
+                                        ng-model="criteria.endda"
+                                        is-open="endda.opened"
+                                        min-date="criteria.begda"
+                                        datepicker-options="dateOptions"
+                                        ng-required="true"
+                                        close-text="Close" /> <span class="input-group-btn">
+                                        <button
+                                            type="button"
+                                            class="btn btn-default"
+                                            ng-click="enddaOpen($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Cost Center </span> <select
+                                        class="form-control"
+                                        ng-model="criteria.costerCenterID"
+                                        ng-options="cc.key as ( cc.key + ' - ' + cc.value ) for cc in criteria.costCenterList">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Type</span> <select
+                                        class="form-control"
+                                        ng-model="criteria.type"
+                                        ng-options="c.key as c.value for c in criteria.typeList">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End Date picker -->
+
+                        </div>
+
+                    </div>
+
+                    <div class="search-panel-second col-md-12">
+                        <div class="row bottom-buffer">
+
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Employee ID </span> <input
+                                        type="text"
+                                        value=""
+                                        class="form-control"
+                                        ng-model="criteria.employeeID">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> First Name </span> <input
+                                        type="text"
+                                        value=""
+                                        class="form-control"
+                                        ng-model="criteria.firstName">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-addon"> Last Name </span> <input
+                                        type="text"
+                                        value=""
+                                        class="form-control"
+                                        ng-model="criteria.lastName">
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="search-btn">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                        ng-disabled="consumeInquiryForm.$invalid">
+                                        <span class="glyphicon glyphicon-search"></span>&nbsp;Search
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">
+				<div class="title">
+					<h4>Inquiry Result:</h4>
+				</div>
+			</div> -->
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="row bottom-buffer">
+                        <div class="col-md-4">
+                            <h5>
+                                <span
+                                    class="inqiury-statistic"
+                                    ng-model="loginMessage">Records selected: {{recordsNumber}}</span>
+                            </h5>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h5>
+                                <span
+                                    class="inqiury-statistic text-center"
+                                    ng-model="countTotal.grandTotal">Coupon Total: {{countTotal.grandTotal}}</span>
+                            </h5>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h5>
+                                <span
+                                    class="inqiury-statistic text-center"
+                                    ng-model="countTotal.selfuseTotal">For Self-Use: {{countTotal.selfuseTotal}}</span>
+                            </h5>
+                        </div>
+
+                        <div class="col-md-2">
+                            <h5>
+                                <span
+                                    class="inqiury-statistic text-center"
+                                    ng-model="countTotal.otheruseTotal">For Others' Use: {{countTotal.otheruseTotal}}</span>
+                            </h5>
+                        </div>
+
+                        <div class="col-md-2">
+                            <input
+                                class="form-control"
+                                placeholder="Filter..."
+                                type="text"
+                                ng-model="filter.$" />
+                        </div>
+                    </div>
+                     <hr />
+                </div>
+               
+                <div class="table-responsive">
+                    <p></p>
+                    <table
+                        ng-table="tableParams"
+                        class="table">
+                        <tr ng-repeat="cpr in $data">
+
+                            <td
+                                data-title="'Registration Date'"
+                                sortable="'regDate'"
+                                class="text-center"><span>{{cpr.regDateText}}</span></td>
+
+                            <td
+                                data-title="'EE ID'"
+                                sortable="'employeeID'"
+                                class="text-center"><span>{{cpr.employeeID}}</span></td>
+
+
+                            <td
+                                data-title="'Employee Name'"
+                                sortable="'employeeName'"
+                                class="text-center"><span>{{cpr.employeeName}}</span></td>
+
+                            <td
+                                data-title="'Cost Center'"
+                                sortable="'costCenterID'"
+                                class="text-center"><span>{{cpr.costCenterID + " - " + cpr.costCenterName}}</span></td>
+
+
+
+                            <td
+                                data-title="'Type'"
+                                sortable="'type'"
+                                class="text-center"><span>{{cpr.typeText}}</span></td>
+
+                            <td
+                                data-title="'Count'"
+                                sortable="'count'"
+                                class="text-center"><span>{{cpr.count}}</span></td>
+
+                            <td
+                                data-title="'Comment'"
+                                sortable="'comment'"
+                                class="text-center"><span>{{cpr.comment}}</span></td>
+
+
+                            <td
+                                data-title="'Misuse Check'"
+                                sortable="'misuseType'"
+                                class="text-center"><span ng-model="cpr.misuseType"></span> <span
+                                ng-if="cpr.misuseType === 'SL'"
+                                uib-tooltip="{{cpr.misuseTypeText}}"
+                                class="glyphicon glyphicon-exclamation-sign msg-warning"
+                                style="vertical-align: middle"></span></td>
+
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

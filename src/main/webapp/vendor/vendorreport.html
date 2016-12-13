@@ -1,0 +1,74 @@
+<div class="row" ng-controller="settlementCtrl">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Vendor Settlement</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="row bottom-buffer">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    Vendor
+                                </span>
+                                <select class="form-control" ng-model="queryForm.vendor">
+                                    <option ng-repeat="v in vendors" value="{{v.id}}">{{v.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    Time
+                                </span>
+                                <input type="month" class="form-control" uib-datepicker-popup="MM/yyyy" ng-model="queryForm.time" is-open="status.opened" min-date="minDate" max-date="maxDate" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button"  class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row bottom-buffer">
+                                <button class="btn btn-primary" ng-click="querySettlement()"><span class="glyphicon glyphicon-search"></span>Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="col-md-6">
+                <div class="panel-heading">
+                    <div class="panel panel-primary">
+                        <div class=panel-heading>
+                            <h3 class=panel-title>Panel title</h3> </div>
+                        <div class=panel-body> Panel content </div>
+                    </div>
+                </div>
+                <div class=panel-body>
+                    <div class="row">Total Count:{{report.totalCount}}</div>
+                    <div class="row">Total Amount:{{report.totalAmount}}</div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Line Name</th>
+                            <th>Consume Count</th>
+                            <th>Consume Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="line in report.lineRecords">
+                            <td>{{ line.lineNO }}</td>
+                            <td>{{ line.lineName }}</td>
+                            <td>{{ line.consumeCount }}</td>
+                            <td>{{ line.consumeTotal }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

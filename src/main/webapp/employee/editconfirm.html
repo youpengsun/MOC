@@ -1,0 +1,29 @@
+<div class="edit-confirm-panel">
+    <legend>
+        Edit Confirmation
+    </legend>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-1"></div>
+            <div class="col-md-11">
+                <h4>Are you sure to save edit?</h4>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-1"></label>
+            <div class="col-md-11">
+                <label "col-md-11 form-control">
+                    <input type="checkbox" ng-model="editconfirm.checked"> Synchronize Wechat Address Book
+                </label>
+            </div>
+        </div>
+        <div class="ngdialog-buttons">
+            <button type="button" class="ngdialog-button btn btn-danger" ng-click="confirm(2)">
+                <span class="glyphicon glyphicon-remove"></span>&nbsp;Cancel
+            </button>
+            <button type="submit" class="ngdialog-button btn btn-primary" ng-click="confirm(1)">
+                <span class="glyphicon glyphicon-check"></span>&nbsp;Confirm
+            </button>
+        </div>
+    </form>
+</div>

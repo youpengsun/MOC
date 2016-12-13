@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>Admin Backend</title>
+      <!-- Mobile Metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <link href="static/css/lib/bootstrap.min.css" rel="stylesheet" />
+      <link rel="shortcut icon" type="image/png" href="static/image/favicon.png">
+      <link href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="static/css/lib/datetimepicker.css">
+      <link rel="stylesheet" href="static/css/lib/loading-bar.min.css">
+      <link href="static/css/style2.css" rel="stylesheet" />
+      <link rel="stylesheet prefetch" href="static/css/vendor/ng-table.min.css">
+      <link rel="stylesheet prefetch" href="static/css/vendor/ngDialog.min.css">
+      <link rel="stylesheet prefetch" href="static/css/vendor/ngDialog-theme-default.min.css">
+      <link rel="stylesheet prefetch" href="static/css/vendor/ngDialog-theme-plain.min.css">
+      <link rel="stylesheet prefetch" href="http://cdn.bootcss.com/angular-motion/0.4.3/angular-motion.min.css">
+      <link rel="stylesheet" href="static/css/lib/daterangepicker.css" />
+   </head>
+   <body role="navigation" ng-app="mainPage" ng-controller="mainPageController">
+      <div class="navbar">
+         <div class="container-fluid container-nav">
+            <!-- Navbar Action -->
+            <!-- Navbar Left -->
+            <div class="navbar-left">
+               <div class="navbar-left title-main">
+                  <h3>SAP Digital Meal Service</h3>
+                  <h4>Administrator Workbench</h4>
+               </div>
+            </div>
+            <!-- Navbar Right -->
+            <div class="navbar-right">
+               <div class="userbox" ng-controller="userboxController">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                     <figure class="profile-picture hidden-xs"> </figure>
+                     <div class="profile-info">
+                        <span class="name"> {{username}}</span>
+                        <span class="role">
+                        <i class="fa fa-circle bk-fg-success"></i>&nbsp;{{role}}
+                        </span>
+                     </div>
+                     <i class="fa custom-caret"></i>
+                  </a>
+                  <div class="dropdown-menu">
+                     <ul class="list-unstyled">
+                        <li class="dropdown-menu-header bk-bg-white bk-margin-top-15"></li>
+                        <li><a href="#/reset"><i class="fa fa-user"></i> Change Password</a></li>
+                        <li><a href="#"><i class="fa fa-wrench"></i> Settings</a></li>
+                        <li><a href="/moc/user/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- End: Header -->
+      <!-- Start: Content -->
+      <div class="container-fluid content">
+         <div class="row">
+            <!-- Sidebar -->
+            <div class="sidebar">
+               <div class="sidebar-collapse">
+                  <!-- Sidebar Header Logo-->
+                  <div class="sidebar-header">
+                     <img src="static/image/logo.png" alt="" />
+                  </div>
+                  <!-- Sidebar Menu-->
+                  <div class="sidebar-menu">
+                     <nav id="menu" class="nav-main" role="navigation">
+                        <ul class="nav nav-sidebar">
+                           <div class="panel-body text-center"></div>
+                           
+                           <li class="nav-parent">
+                              <a><i class="fa fa-user" aria-hidden="true"></i><span>Employee</span></a>
+                              <ul class="nav nav-children">
+                                 <li><a class="sidebar-status" href="#/maintenance" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Maintenance</span></a></li>
+                                 <li><a class="sidebar-status" href="#/batchUpload" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Batch Upload</span></a></li>
+                              </ul>
+                           </li>
+                           
+                           <li class="nav-parent">
+                              <a><i class="fa fa-tasks" aria-hidden="true"></i><span>Vendor</span></a>
+                              <ul class="nav nav-children">
+                                 <li><a class="sidebar-status" href="#/vendorMaintain" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Maintenance</span></a></li>
+                                 <li><a class="sidebar-status" href="#/vendorAdd" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Add Vendor</span></a></li>
+                              </ul>
+                           </li>
+                           
+                           <li class="nav-parent">
+                              <a><i class="fa fa-bar-chart" aria-hidden="true"></i><span>Transaction</span></a>
+                              <ul class="nav nav-children">
+                                 <li><a class="sidebar-status" href="#/consumeInquiry" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Inquiry</span></a></li>
+                                 <li><a class="sidebar-status" href="#/settlement" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Settlement</span></a></li>
+                                 <li><a class="sidebar-status" href="#/analysis" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Analysis</span></a></li>
+                              </ul>
+                           </li>
+                           
+                           <li class="nav-parent">
+                              <a><i class="fa fa-refresh" aria-hidden="true"></i><span>Sychronize Wechat</span></a>
+                              <ul class="nav nav-children">
+                                 <li><a class="sidebar-status" href="#/syncdeparment" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Department</span></a></li>
+                                 <li><a class="sidebar-status" href="#/synchronize" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Employee</span></a></li>
+                              </ul>
+                           </li>
+                           <li class="nav-parent">
+                              <a><i class="fa fa-ticket" aria-hidden="true"></i><span>Coupon</span></a>
+                              <ul class="nav nav-children">
+                              	<li><a class="sidebar-status" href="#/addCoupon" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Add Coupon</span></a></li>
+                                 <li><a class="sidebar-status" href="#/maintainCoupon" ng-click="checkSidebarStatus()"><span class="text">&nbsp;Inquiry</span></a></li>
+                              </ul>
+                           </li>
+                        </ul>
+                     </nav>
+                  </div>
+                  <!-- End Sidebar Menu-->
+               </div>
+               <div class="sidebar-footer"></div>
+            </div>
+            <!-- End Sidebar -->
+            <!-- Main Page -->
+            <div class="main sidebar-minified">
+               <!-- Page Header -->
+               <div class="page-header">
+                  <div id="alerts-container"></div>
+                  <div id="alerts-container2"></div>
+                  <div class="pull-left">
+                     <ol class="breadcrumb visible-sm visible-md visible-lg">
+                        <li><a href="#" ng-model="tab.first"><i class="icon fa fa-home"></i>{{tab.first}}</a></li>
+                        <li><a href="#" ng-model="tab.second"> <i class="{{tab.secondIcon}}"></i> {{tab.second}}</a></li>
+                        <li class="active" ng-model="tab.third"><i class="fa fa-pencil-square-o"> </i> {{tab.third}}</li>
+                     </ol>
+                  </div>
+               </div>
+               <ng-view></ng-view>
+            </div>
+         </div>
+      </div>
+      
+      <script src="static/js/lib/jquery.min.js"></script>      
+      <script src="static/js/lib/moment.min.js"></script>
+      <script src="static/js/lib/daterangepicker.js"></script>
+      <script src="static/js/lib/angular.min.js"></script>
+      <script src="static/js/lib/angular-route.min.js"></script>
+      <script src="static/js/lib/angular-strap.min.js"></script>
+      <script src="static/js/lib/angular-strap.tpl.min.js"></script>
+      <script src="static/js/lib/ui-bootstrap-tpls-0.14.3.min.js"></script>
+      <script src="static/js/lib/angular-animate.min.js" data-semver="1.4.2"></script>
+      <script src="static/js/lib/ngPrint.min.js"></script>
+       
+      <script src="static/js/lib/bootstrap.min.js"></script>
+      <script src="static/js/lib/jquery.mmenu.min.js"></script>
+      <script src="static/js/lib/datetimepicker.js"></script>     
+      <script src="static/js/lib/dateTimeInput.js"></script>
+      
+      <!-- Time Range -->
+	  <script src="static/js/lib/ng-bs-daterangepicker.js" ></script>
+	  
+      <script src="static/js/lib//core.min.js"></script>
+      <script src="static/js/lib/ng-table.min.js"></script>
+      <script src="static/js/lib/ngDialog.min.js"></script>
+      <script src="static/js/lib/showErrors.min.js"></script>
+      <script src="static/js/lib/checklist-model.js"></script>
+      <script src="static/js/lib/highcharts.js"></script>
+      <script src="static/js/lib/highcharts-ng.js"></script>
+      <script src="static/js/lib/loading-bar.min.js"></script>
+      <script src="static/js/app.js"></script>
+      <script src="static/js/maintainController.js"></script>
+      <script src="static/js/batchUploadController.js"></script>
+      <script src="static/js/synchronizeController.js"></script>
+      <script src="static/js/syncdepartmentController.js"></script>
+      <script src="static/js/vendorMaintainController.js"></script>
+      <script src="static/js/vendorAddController.js"></script>
+      <script src="static/js/userboxController.js"></script>
+      <script src="static/js/settlementCtrl.js"></script>
+      <script src="static/js/analysisCtrl.js"></script>
+      <script src="static/js/reset.js"></script>
+      <script src="static/js/consumeInquiryController.js"></script>
+      <script src="static/js/maintainCouponCtrl.js"></script>
+      <script src="static/js/addCouponCtrl.js"></script>
+   </body>
+</html>

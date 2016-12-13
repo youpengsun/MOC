@@ -1,0 +1,32 @@
+<div class="resetPassword" ng-controller="resetCtrl">
+    <h4>Reset Password &nbsp;</h4>
+    <form class="form-horizontal">
+		<div class="form-group">
+    		<label for="inputPassword" class="col-sm-2 control-label">Old Password</label>
+    		<div class="col-sm-3">
+      			<input type="password" class="form-control" id="oldPassword"  ng-model="reset.oldPassword"
+         		placeholder="Old Password">
+    		</div>
+    		<span class="error-info" id="oldPassword-info" ng-model="info.oldPassword">{{info.oldPassword}}</span>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputPassword" class="col-sm-2 control-label">New Password</label>
+    		<div class="col-sm-3">
+      			<input type="password" class="form-control" id="newPassword" ng-model="reset.newPassword"
+         		placeholder="New Passowrd">
+    		</div>
+    		<span class="error-info" id="newPassword-info" ng-model="info.newPassword">{{info.newPassword}}</span>
+  		</div>
+  		<div class="form-group">
+    		<label for="inputPassword" class="col-sm-2 control-label">Repeat New Password</label>
+    		<div class="col-sm-3">
+      			<input type="password" class="form-control" id="repeatPassword" ng-model="repeatPassword"
+         		placeholder="New Password">
+    		</div>
+    		<span class="error-info" id="repeatPassword-info" ng-model="info.repeatPassword">{{info.repeatPassword}}</span>
+  		</div>
+  		<div class="button-container">
+            <button id='submit' ng-click="submit()" ng-disabled="error"><span>submit</span></button>
+        </div>
+    </form>
+</div>
